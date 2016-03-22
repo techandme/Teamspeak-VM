@@ -1,7 +1,7 @@
 # Teamspeak-VM
-# Base OS Ubuntu Server 14.04.04 LTS
 
 * VM includes:
+* Base OS Ubuntu Server 14.04.04 LTS
 * Webmin
 * Teamspeak
 
