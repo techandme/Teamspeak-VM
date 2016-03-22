@@ -19,3 +19,6 @@
 
 If you want to access your Teamspeak server from WAN make sure to port forward these ports to your Lan machine:
 Per default, the TS3 server creates a virtual voice server on port 9987 (UDP). The ServerQuery is listening on port 10011 (TCP) and file transfers will use port 30033 (TCP).
+
+# https://www.techandme.se for more virtual machines, guides, news and more
+Please use this issue tracker https://github.com/ezraholm50/Teamspeak-VM/issues if something went wrong, but before that, please read the README to check if you have done everything right.
