@@ -17,5 +17,5 @@
 - Finally connect using the client, using your internal LAN IP or if you want to make it public, see below.
 
 
-If you want to access your Teamspeak server from WAN make sure to port forward these ports to your Lan machine
-- udp 9987 - tcp 30033 - tcp 10011
+If you want to access your Teamspeak server from WAN make sure to port forward these ports to your Lan machine:
+Per default, the TS3 server creates a virtual voice server on port 9987 (UDP). The ServerQuery is listening on port 10011 (TCP) and file transfers will use port 30033 (TCP).
