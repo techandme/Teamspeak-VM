@@ -1,16 +1,7 @@
-#!/bin/bash -e
+#!/bin/bash
 #
-# rc.local
+## Tech and Me ## - ©2016, https://www.techandme.se/
 #
-# This script is executed at the end of each multiuser runlevel.
-# Make sure that the script will "exit 0" on success or any other
-# value on error.
-#
-# In order to enable or disable this script just change the execution
-# bits.
-#
-# By default this script does nothing.
-
 SCRIPTS="/var/scripts"
 GITHUB_REPO="https://raw.githubusercontent.com/ezraholm50/Teamspeak-VM/master"
 
@@ -41,7 +32,7 @@ then
 	sleep 10
 	reboot
 else
-	echo "setup.sh."
+	echo "Downloaded setup.sh."
 	sleep 1
 fi
 
@@ -271,5 +262,3 @@ else
 	echo "change-teamspeak-profile.sh executed OK."
 	sleep 1
 fi
-
-exit 0
