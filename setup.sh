@@ -142,7 +142,6 @@ echo
 clear
 bash $SCRIPTS/ufw.sh
 bash $SCRIPTS/webmin.sh
-bash $SCRIPTS/teamspeak.sh
 
 # Upgrade system
 clear
@@ -170,29 +169,6 @@ UPDATE_DAILY
 apt-get autoremove -y
 echo "$CLEARBOOT"
 clear
-
-# Success!
-echo -e "\e[32m"
-echo    "+--------------------------------------------------------------------+"
-echo    "| You have sucessfully installed Teamspeak! System will now reboot... |"
-echo    "|                                                                    |"
-echo -e "|         \e[0mLogin to Teamspeak locally with address:\e[36m" $ADDRESS"\e[32m      |"
-echo    "|                                                                    |"
-echo -e "|         \e[0mPublish your server online! \e[36mhttps://goo.gl/PRdtPC\e[32m          |"
-echo    "|                                                                    |"
-echo    "|         \e[0m Firewall is enabled ports 22, 9987, 10011,\e[32m     |"
-echo    "|                                                                    |"
-echo    "|         \e[0m30033 and 10000 are open.\e[32m                       |"
-echo    "|                                                                    |"
-echo    "|                                                                    |"
-echo    "|         \e[0mAccess webmin at $ADDRESS:10000\e[32m             |"
-echo    "|                                                                    |"
-echo -e "|    \e[91m#################### Tech and Me - 2016 ####################\e[32m    |"
-echo    "+--------------------------------------------------------------------+"
-echo
-read -p "Press any key to reboot..." -n1 -s
-echo -e "\e[0m"
-echo
 
 # Cleanup 2
 rm $SCRIPTS/ip*
@@ -238,6 +214,8 @@ cat << RCLOCAL > "/etc/rc.local"
 exit 0
 
 RCLOCAL
+
+bash $SCRIPTS/teamspeak.sh
 
 ## Reboot
 reboot
