@@ -1,4 +1,7 @@
-#!/bin/sh
+#!/bin/bash
+#
+## Tech and Me ## - ©2016, https://www.techandme.se/
+#
 IFACE="eth0"
 
 IFCONFIG="/sbin/ifconfig"
