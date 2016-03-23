@@ -16,6 +16,7 @@ clear
 echo "+--------------------------------------------------------------------+"
 echo "| This script will configure your machine and do the following:      |"
 echo "|                                                                    |"
+echo "| - Install Teamspeak                                                |"
 echo "| - Install Webmin                                                   |"
 echo "| - Upgrade your system to latest version                            |"
 echo "| - Set new passwords to Ubuntu Server and webmin                    |"
@@ -199,12 +200,12 @@ rm $SCRIPTS/webmin*
 rm $SCRIPTS/ufw*
 rm $SCRIPTS/set_nameserver*
 rm $SCRIPTS/set_hostname*
-sed -i "s|instruction.sh|techandme.sh|g" /home/ocadmin/.bash_profile
+sed -i "s|instruction.sh|techandme.sh|g" /home/teamspeak/.bash_profile
+sed -i 's|sudo -i||g' /home/teamspeak/.bash_profile
 cat /dev/null > ~/.bash_history
 cat /dev/null > /var/spool/mail/root
 cat /dev/null > /var/spool/mail/teamspeak
 cat /dev/null > /var/log/cronjobs_success.log
-sed -i 's|sudo -i||g' /home/teamspeak/.bash_profile
 cat << RCLOCAL > "/etc/rc.local"
 #!/bin/sh -e
 #
