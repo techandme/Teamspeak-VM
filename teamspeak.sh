@@ -7,6 +7,11 @@
 # Add user
 adduser --disabled-login teamspeak3
 
+
+
+
+y
+
 # Get Teamspeak
 wget http://ftp.4players.de/pub/hosted/ts3/releases/3.0.10.3/teamspeak3-server_linux-amd64-3.0.10.3.tar.gz -p /tmp
 
@@ -28,11 +33,11 @@ echo -e "\e[32m"
 echo    "+--------------------------------------------------------------------+"
 echo    "| Next you will need to copy/paste 3 things to a safe location       |"
 echo    "|                                                                    |"
-echo -e "|         \e[0mLogin, password, security token\e[32m                 |"
+echo -e "|         \e[0mLogin, password, security token\e[32m                       |"
 echo    "|                                                                    |"
-echo -e "|         \e[0mIF YOU FAIL TO DO SO, YOU HAVE TO REINSTALL YOUR SYSTEM\e[32m          |"
+echo -e "|         \e[0mIF YOU FAIL TO DO SO, YOU HAVE TO REINSTALL YOUR SYSTEM\e[32m    |"
 echo    "|                                                                    |"
-echo -e "|    \e[91mPress Ctrl + C when your done to finish te script\e[32m    |"
+echo -e "|    \e[91mPress Ctrl + C when your done to finish te script\e[32m         |"
 echo    "+--------------------------------------------------------------------+"
 echo
 read -p "Press any key to start copying the important stuff to a safe location..." -n1 -s
