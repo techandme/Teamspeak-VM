@@ -165,17 +165,13 @@ echo -e "|         \e[0mLogin to Teamspeak locally with adress:\e[36m" $ADDRESS"
 echo    "|                                                                    |"
 echo -e "|         \e[0mPublish your server online! \e[36mhttps://goo.gl/PRdtPC\e[32m          |"
 echo    "|                                                                    |"
+echo    "|         \e[0m Firewall is enabled ports 22, 9987, 10011,\e[32m     |"
+echo    "|                                                                    |"
+echo    "|         \e[0m30033 and 10000 are open.\e[32m                       |"
 echo    "|                                                                    |"
 echo    "|                                                                    |"
-
-
-
-
-ufw allow 22
-ufw allow 9987
-ufw allow 10011
-ufw allow 30033
-ufw allow 10000
+echo    "|         \e[0mAccess webmin at $ADDRESS:10000\e[32m                 |"
+echo    "|                                                                    |"
 echo -e "|    \e[91m#################### Tech and Me - 2016 ####################\e[32m    |"
 echo    "+--------------------------------------------------------------------+"
 echo
@@ -184,16 +180,13 @@ echo -e "\e[0m"
 echo
 
 # Cleanup 2
-rm $SCRIPTS/owncloud-startup-script*
 rm $SCRIPTS/ip*
 rm $SCRIPTS/test_connection*
-rm $SCRIPTS/change-ocadmin-profile*
-rm $SCRIPTS/change-root-profile*
-rm $SCRIPTS/install-redis-php-7*
-rm $SCRIPTS/update-config*
-rm $SCRIPTS/owncloud_install*
-rm $SCRIPTS/trusted*
-rm $SCRIPTS/instruction.sh
+rm $SCRIPTS/teamspeak*
+rm $SCRIPTS/webmin*
+rm $SCRIPTS/ufw*
+rm $SCRIPTS/set_nameserver*
+rm $SCRIPTS/set_hostname*
 sed -i "s|instruction.sh|techandme.sh|g" /home/ocadmin/.bash_profile
 cat /dev/null > ~/.bash_history
 cat /dev/null > /var/spool/mail/root
