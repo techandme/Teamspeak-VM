@@ -35,7 +35,7 @@ then
 	sleep 10
 	reboot
 else
-	echo "initial.sh."
+	echo "Downloaded initial.sh."
 	sleep 1
 fi
 
