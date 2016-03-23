@@ -45,5 +45,5 @@ echo -e "\e[0m"
 echo
 
 # Start service
-service teamspeak3 start
+service teamspeak3 start && sleep 120
 #sleep 60 && kill -INT $PID_TS | service teamspeak3 start
