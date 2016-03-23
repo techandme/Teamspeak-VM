@@ -1,1 +1,20 @@
 
+#!/bin/bash
+WANIP=$(dig +short myip.opendns.com @resolver1.opendns.com)
+ADDRESS=$(ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1')
+clear
+figlet -f small Tech and Me
+echo "           https://www.techandme.se"
+echo
+echo "Firewall enabled, ports open: 22, 9987, 10000, 10011, 30033"
+echo "To add a port type: ufw allow portnumber"
+echo
+echo "Access Webmin at: https://$ADDRESS:10000"
+echo
+echo "Publish your server online: https://goo.gl/PRdtPC"
+echo
+echo "Access Teamspeak:"
+echo "WAN IP: $WANIP"
+echo "LAN IP: $ADDRESS"
+echo
+exit 0
