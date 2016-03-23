@@ -38,11 +38,15 @@ echo -e "\e[0m"
 
 # Update system
 apt-get update
+clear
 apt-get upgrade -y
+clear
 aptitude full-upgrade -y
+clear
 
 # Install figlet
 apt-get install figlet -y
+clear
 
 # Set keyboard layout
 echo "Current keyboard layout is Swedish"
