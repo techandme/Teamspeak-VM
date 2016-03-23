@@ -34,7 +34,7 @@ echo    "|                                                                    |"
 echo -e "|         \e[0mIF YOU FAIL TO DO SO, YOU HAVE TO REINSTALL YOUR SYSTEM\e[32m    |"
 echo    "|                                                                    |"
 echo -e "|    \e[91mPress Ctrl + C when your done and please reboot\e[32m                 |"
-echo    "|    With the command "reboot" to finish the install.\e[32m                    |"
+echo    "|    \e[91mWith the command "reboot" to finish the install.\e[32m               |"
 echo    "+--------------------------------------------------------------------+"
 echo
 read -p "Press any key to start copying the important stuff to a safe location..." -n1 -s
