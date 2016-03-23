@@ -75,7 +75,7 @@ if 		[ -f $SCRIPTS/webmin.sh ];
         then
                 echo "webmin.sh exists"
         else
-        	wget -q $SCRIPTS/webmin.sh -P $SCRIPTS
+        	wget -q $GITHUB_REPO/webmin.sh -P $SCRIPTS
 fi
 if [[ $? > 0 ]]
 then
