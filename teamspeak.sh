@@ -33,7 +33,7 @@ echo -e "|         \e[0mLogin, password, security token\e[32m                   
 echo    "|                                                                    |"
 echo -e "|         \e[0mIF YOU FAIL TO DO SO, YOU HAVE TO REINSTALL YOUR SYSTEM\e[32m    |"
 echo    "|                                                                    |"
-echo -e "|    \e[91mPress Ctrl + C when your done and please reboot                 |"
+echo -e "|    \e[91mPress Ctrl + C when your done and please reboot\e[32m                 |"
 echo    "|    With the command "reboot" to finish the install.\e[32m                    |"
 echo    "+--------------------------------------------------------------------+"
 echo
