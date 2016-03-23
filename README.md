@@ -7,7 +7,7 @@
 
 # How to:
 - Download the vm here: link.url.se
-- Mount the .vmdk in VBox or VMWare start the machine windowed, not headless
+- Mount the .vmdk in VBox or VMWare start the machine windowed, or headless and use ssh.
 - Login using: teamspeak////teamspeak
 - type in the sudo password: teamspeak
 - Sit back and let the machine do the rest
