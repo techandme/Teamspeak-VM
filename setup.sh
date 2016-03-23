@@ -204,6 +204,7 @@ cat /dev/null > ~/.bash_history
 cat /dev/null > /var/spool/mail/root
 cat /dev/null > /var/spool/mail/teamspeak
 cat /dev/null > /var/log/cronjobs_success.log
+cat /dev/null > /etc/rc.local
 cat << RCLOCAL > "/etc/rc.local"
 #!/bin/sh -e
 #
