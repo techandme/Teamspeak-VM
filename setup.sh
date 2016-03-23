@@ -200,7 +200,7 @@ rm $SCRIPTS/test_connection*
 rm $SCRIPTS/teamspeak*
 rm $SCRIPTS/webmin*
 rm $SCRIPTS/ufw*
-sed -i "s|instruction.sh|techandme.sh|g" /home/teamspeak/.bash_profile
+sed -i "s|instruction.sh|techandme.se|g" /home/teamspeak/.bash_profile
 sed -i 's|sudo -i||g' /home/teamspeak/.bash_profile
 cat /dev/null > ~/.bash_history
 cat /dev/null > /var/spool/mail/root
