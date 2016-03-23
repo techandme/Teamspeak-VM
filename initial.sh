@@ -163,23 +163,6 @@ else
 	sleep 1
 fi
 
-# Clears command history on every login
-if 		[ -f $SCRIPTS/history.sh ];
-        then
-                echo "history.sh exists"
-        else
-        	wget -q $GITHUB_REPO/history.sh -P $SCRIPTS
-fi
-if [[ $? > 0 ]]
-then
-	echo "Download of scripts failed. System will reboot in 10 seconds..."
-	sleep 10
-	reboot
-else
-	echo "Downloaded history.sh."
-	sleep 1
-fi
-
 # Change teamspeak .bash_profile
 if 		[ -f $SCRIPTS/change-teamspeak-profile.sh ];
         then
