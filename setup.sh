@@ -206,6 +206,20 @@ cat /dev/null > ~/.bash_history
 cat /dev/null > /var/spool/mail/root
 cat /dev/null > /var/spool/mail/teamspeak
 cat /dev/null > /var/log/cronjobs_success.log
+
+# Reset root's .bash_profile
+cat /dev/null > /root/.bash_profile
+cat << BASHROOT > "/root/.bash_profile"
+# ~/.profile: executed by Bourne-compatible login shells.
+if [ "/bin/bash" ]; then
+  if [ -f ~/.bashrc ]; then
+    . ~/.bashrc
+  fi
+fi
+mesg n
+
+BASHROOT
+# Reset rc.local
 cat /dev/null > /etc/rc.local
 cat << RCLOCAL > "/etc/rc.local"
 #!/bin/sh -e
