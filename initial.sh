@@ -145,6 +145,15 @@ if 		[ -f $SCRIPTS/instruction.sh ];
         else
         	wget -q $GITHUB_REPO/instruction.sh -P $SCRIPTS
 fi
+if [[ $? > 0 ]]
+then
+	echo "Download of scripts failed. System will reboot in 10 seconds..."
+	sleep 10
+	reboot
+else
+	echo "Downloaded instruction.sh."
+	sleep 1
+fi
 
 # Tech and Me figlet
 if              [ -f $SCRIPTS/techandme.sh ];
@@ -159,7 +168,7 @@ then
 	sleep 10
 	reboot
 else
-	echo "Downloaded instruction.sh."
+	echo "Downloaded techandme.sh."
 	sleep 1
 fi
 
