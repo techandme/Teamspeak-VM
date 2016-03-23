@@ -35,6 +35,14 @@ read -p "Press any key to start the script..." -n1 -s
 clear
 echo -e "\e[0m"
 
+# Update system
+apt-get update
+apt-get upgrade -y
+aptitude full-upgrade -y
+
+# Install figlet
+apt-get install figlet -y
+
 # Set keyboard layout
 echo "Current keyboard layout is Swedish"
 echo "You must change keyboard layout to your language"
