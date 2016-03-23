@@ -140,8 +140,6 @@ else
 fi
 echo
 clear
-bash $SCRIPTS/set_hostname.sh
-bash $SCRIPTS/set_nameserver.sh
 bash $SCRIPTS/ufw.sh
 bash $SCRIPTS/webmin.sh
 bash $SCRIPTS/teamspeak.sh
