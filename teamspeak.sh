@@ -1,4 +1,7 @@
-
+#!/bin/bash
+#
+## Tech and Me ## - ©2016, https://www.techandme.se/
+#
 #PID_TS=(ps -ef | grep "teamspeak3" | awk '{print $2}')
 
 # Add user
