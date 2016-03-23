@@ -5,7 +5,7 @@
 clear
 cat << INST1
 +-----------------------------------------------------------------------+
-| Thank you for downloading this Teamspeak VM made by Tech and Me!     |
+| Thank you for downloading this Teamspeak VM made by Tech and Me!      |
 |                                                                       |
 INST1
 echo -e "|"  "\e[32mTo run the startup script, just type: the sudo password\e[0m               |"
