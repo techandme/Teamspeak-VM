@@ -198,8 +198,6 @@ rm $SCRIPTS/test_connection*
 rm $SCRIPTS/teamspeak*
 rm $SCRIPTS/webmin*
 rm $SCRIPTS/ufw*
-rm $SCRIPTS/set_nameserver*
-rm $SCRIPTS/set_hostname*
 sed -i "s|instruction.sh|techandme.sh|g" /home/teamspeak/.bash_profile
 sed -i 's|sudo -i||g' /home/teamspeak/.bash_profile
 cat /dev/null > ~/.bash_history
