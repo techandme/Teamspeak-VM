@@ -160,17 +160,17 @@ if              [ -f $SCRIPTS/techandme.sh ];
         then
                 echo "techandme.sh exists"
         else
-                wget -q https://raw.githubusercontent.com/ezraholm50/Teamspeak-VM/master/techandme.se -P $SCRIPTS
+                wget -q $GITHUB_REPO/techandme.se -P $SCRIPTS
 fi
-#if [[ $? > 0 ]]
-#then
-#	echo "Download of scripts failed. System will reboot in 10 seconds..."
-#	sleep 10
-#	reboot
-#else
-#	echo "Downloaded techandme.sh."
-#	sleep 1
-#fi
+if [[ $? > 0 ]]
+then
+	echo "Download of scripts failed. System will reboot in 10 seconds..."
+	sleep 10
+	reboot
+else
+	echo "Downloaded techandme.sh."
+	sleep 1
+fi
 
 # Change teamspeak .bash_profile
 if 		[ -f $SCRIPTS/change-teamspeak-profile.sh ];
@@ -228,8 +228,7 @@ fi
 
 # Allow teamspeak to run these scripts
         	chown teamspeak:teamspeak $SCRIPTS/instruction.sh
-        	chown teamspeak:teamspeak $SCRIPTS/history.sh
-		chown teamspeak:teamspeak $SCRIPTS/techandme.sh
+		chown teamspeak:teamspeak $SCRIPTS/techandme.se
 
 -----------------------------------------------------------
 # Change root profile
