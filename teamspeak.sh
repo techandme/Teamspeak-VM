@@ -29,11 +29,12 @@ echo -e "\e[32m"
 echo    "+--------------------------------------------------------------------+"
 echo    "| Next you will need to copy/paste 3 things to a safe location       |"
 echo    "|                                                                    |"
-echo -e "|         \e[0mLogin, password, security token\e[32m                       |"
+echo -e "|         \e[0mLogin, password, security token\e[32m                         |"
 echo    "|                                                                    |"
 echo -e "|         \e[0mIF YOU FAIL TO DO SO, YOU HAVE TO REINSTALL YOUR SYSTEM\e[32m    |"
 echo    "|                                                                    |"
-echo -e "|    \e[91mPress Ctrl + C when your done to finish the script\e[32m         |"
+echo -e "|    \e[91mPress Ctrl + C when your done and please reboot\e[32m             |"
+echo    "|    \e[91mWith the command "reboot" to finish the install.\e[32m            |"
 echo    "+--------------------------------------------------------------------+"
 echo
 read -p "Press any key to start copying the important stuff to a safe location..." -n1 -s
@@ -41,5 +42,5 @@ echo -e "\e[0m"
 echo
 
 # Start service
-service teamspeak3 start && sleep 120
+service teamspeak3 start && sleep 120 && reboot
 #sleep 60 && kill -INT $PID_TS | service teamspeak3 start
