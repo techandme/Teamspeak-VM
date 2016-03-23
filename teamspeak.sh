@@ -5,15 +5,11 @@
 #PID_TS=(ps -ef | grep "teamspeak3" | awk '{print $2}')
 
 # Add user
-adduser --disabled-login teamspeak3
-
-
-
-
-y
+useradd teamspeak3
+sed -i 's|:/home/teamspeak3:|:/home/teamspeak3:/usr/sbin/nologin|g' /etc/passwd
 
 # Get Teamspeak
-wget http://ftp.4players.de/pub/hosted/ts3/releases/3.0.10.3/teamspeak3-server_linux-amd64-3.0.10.3.tar.gz -p /tmp
+wget http://ftp.4players.de/pub/hosted/ts3/releases/3.0.10.3/teamspeak3-server_linux-amd64-3.0.10.3.tar.gz -P /tmp
 
 # Unpack Teamspeak
 tar xzf /tmp/teamspeak3-server_linux-amd64-3.0.10.3.tar.gz
