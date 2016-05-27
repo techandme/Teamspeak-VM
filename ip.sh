@@ -2,8 +2,10 @@
 #
 ## Tech and Me ## - ©2016, https://www.techandme.se/
 #
-IFACE="eth0"
 
+IFCONFIG="/sbin/ifconfig"
+IP="/sbin/ip"
+IFACE=$($IP -o link show | awk '{print $2,$9}' | grep "UP" | cut -d ":" -f 1)
 IFCONFIG="/sbin/ifconfig"
 IP="/sbin/ip"
 INTERFACES="/etc/network/interfaces"
