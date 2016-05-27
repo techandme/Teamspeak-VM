@@ -21,6 +21,9 @@ cat <<-IPCONFIG > "$INTERFACES"
                 address $ADDRESS
                 netmask $NETMASK
                 gateway $GATEWAY
+                pre-up /sbin/ethtool -K $IFACE tso off
+                pre-up /sbin/ethtool -K $IFACE gso off
+
 # Exit and save:	[CTRL+X] + [Y] + [ENTER]
 # Exit without saving:	[CTRL+X]
 IPCONFIG
