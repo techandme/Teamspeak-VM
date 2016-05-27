@@ -74,7 +74,10 @@ echo "nameserver 8.26.56.26" > /etc/resolvconf/resolv.conf.d/base
 echo "nameserver 8.20.247.20" >> /etc/resolvconf/resolv.conf.d/base
 
 # Change IP
-IFACE="eth0"
+IFCONFIG="/sbin/ifconfig"
+IP="/sbin/ip"
+INTERFACES="/etc/network/interfaces"
+IFACE=$($IP -o link show | awk '{print $2,$9}' | grep "UP" | cut -d ":" -f 1)
 IFCONFIG="/sbin/ifconfig"
 ADDRESS=$($IFCONFIG $IFACE | awk -F'[: ]+' '/\<inet\>/ {print $4; exit}')
 echo -e "\e[0m"
@@ -91,14 +94,14 @@ echo -e "\e[32m"
 read -p "Press any key to set static IP..." -n1 -s
 clear
 echo -e "\e[0m"
-ifdown eth0
+ifdown $IFACE
 sleep 2
-ifup eth0
+ifup $IFACE
 sleep 2
 bash $SCRIPTS/ip.sh
-ifdown eth0
+ifdown $IFACE
 sleep 2
-ifup eth0
+ifup $IFACE
 sleep 2
 echo
 echo "Testing if network is OK..."
@@ -115,9 +118,9 @@ echo -e "\e[0m"
 nano /etc/network/interfaces
 clear &&
 echo "Testing if network is OK..."
-ifdown eth0
+ifdown $IFACE
 sleep 2
-ifup eth0
+ifup $IFACE
 sleep 2
 echo
 bash $SCRIPTS/test_connection.sh
