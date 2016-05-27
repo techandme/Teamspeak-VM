@@ -230,7 +230,7 @@ fi
         	chown teamspeak:teamspeak $SCRIPTS/instruction.sh
 		chown teamspeak:teamspeak $SCRIPTS/techandme.se
 
------------------------------------------------------------
+#-----------------------------------------------------------
 # Change root profile
         	bash $SCRIPTS/change-root-profile.sh
 if [[ $? > 0 ]]
