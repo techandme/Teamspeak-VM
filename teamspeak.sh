@@ -12,13 +12,15 @@ sed -i 's|:/home/teamspeak3:|:/home/teamspeak3:/usr/sbin/nologin|g' /etc/passwd
 wget http://ftp.4players.de/pub/hosted/ts3/releases/3.0.10.3/teamspeak3-server_linux-amd64-3.0.10.3.tar.gz -P /tmp
 
 # Unpack Teamspeak
-tar xzf /tmp/teamspeak3-server_linux-amd64-3.0.10.3.tar.gz
+cd /tmp
+tar xzf teamspeak3-server_linux-amd64-3.0.10.3.tar.gz
+cd
 
 # Move to right directory
 mv /tmp/teamspeak3-server_linux-amd64 /usr/local/teamspeak3
 
 # Set ownership
-chown -R teamspeak3 /usr/local/teamspeak3
+chown -R teamspeak3:root /usr/local/teamspeak3
 
 # Add to upstart
 ln -s /usr/local/teamspeak3/ts3server_startscript.sh /etc/init.d/teamspeak3
