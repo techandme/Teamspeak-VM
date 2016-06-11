@@ -1,12 +1,12 @@
 # Teamspeak-VM
 
 * VM includes:
-* Base OS Ubuntu Server 14.04.04 LTS
+* Base OS Ubuntu Server 16.04 LTS
 * Webmin
 * Teamspeak
 
 # How to:
-- Download the vm here: link.url.se
+- Download the vm here: https://techandme.fsgo.se/teamspeak-vm/
 - Mount the .vmdk in VBox or VMWare start the machine windowed, or headless and use ssh.
 - Login using: teamspeak////teamspeak
 - type in the sudo password: teamspeak
