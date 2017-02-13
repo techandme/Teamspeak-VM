@@ -3,7 +3,7 @@
 ## Tech and Me ## - ©2016, https://www.techandme.se/
 #
 SCRIPTS="/var/scripts"
-GITHUB_REPO="https://raw.githubusercontent.com/ezraholm50/Teamspeak-VM/master"
+GITHUB_REPO="https://raw.githubusercontent.com/techandme/Teamspeak-VM/master"
 IFACE=$(lshw -c network | grep "logical name" | awk '{print $3}')
 
 # Set correct interface

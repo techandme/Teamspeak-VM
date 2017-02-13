@@ -17,7 +17,7 @@
 - Finally connect using the client, using your internal LAN IP or if you want to make it public, see below.
 
 # How to install on clean vm you already have:
-- wget https://raw.githubusercontent.com/ezraholm50/Teamspeak-VM/master/initial.sh
+- wget https://raw.githubusercontent.com/techandme/Teamspeak-VM/master/initial.sh
 - bash initial.sh
 - exit, ssh back in / log back in and follow the instructions
 
@@ -25,4 +25,4 @@ If you want to access your Teamspeak server from WAN make sure to port forward t
 Per default, the TS3 server creates a virtual voice server on port 9987 (UDP). The ServerQuery is listening on port 10011 (TCP) and file transfers will use port 30033 (TCP).
 
 # https://www.techandme.se for more virtual machines, guides, news and more
-Please use this issue tracker https://github.com/ezraholm50/Teamspeak-VM/issues if something went wrong, but before that, please read the README to check if you have done everything right.
+Please use this issue tracker https://github.com/techandme/Teamspeak-VM/issues if something went wrong, but before that, please read the README to check if you have done everything right.
