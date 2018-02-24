@@ -36,12 +36,51 @@ read -p "Press any key to start the script..." -n1 -s
 clear
 echo -e "\e[0m"
 
+network_ok() {
+    echo "Testing if network is OK..."
+    service networking restart
+    if wget -q -T 20 -t 2 http://github.com -O /dev/null
+    then
+        return 0
+    else
+        return 1
+    fi
+}
+
+# Check network
+if network_ok
+then
+    printf "Online!\n"
+else
+    echo "Setting correct interface..."
+    [ -z "$IFACE" ] && IFACE=$(lshw -c network | grep "logical name" | awk '{print $3; exit}')
+    # Set correct interface
+    {
+        sed '/# The primary network interface/q' /etc/network/interfaces
+        printf 'auto %s\niface %s inet dhcp\n# This is an autoconfigured IPv6 interface\niface %s inet6 auto\n' "$IFACE" "$IFACE" "$IFACE"
+    } > /etc/network/interfaces.new
+    mv /etc/network/interfaces.new /etc/network/interfaces
+    service networking restart
+    # shellcheck source=lib.sh
+    CHECK_CURRENT_REPO=1 . <(curl -sL https://raw.githubusercontent.com/nextcloud/vm/master/lib.sh)
+    unset CHECK_CURRENT_REPO
+fi
+
+# Check network
+if network_ok
+then
+    printf "Online!\n"
+else
+    echo "Network NOT OK!"
+    echo "You must have a working Network connection to run this script."
+    echo "Please report this issue here: https://github.com/techandme/Teamspeak-VM"
+    exit 1
+fi
+
 # Update system
-apt-get update
-clear
-apt-get upgrade -y
-clear
-aptitude full-upgrade -y
+apt update
+apt upgrade -y
+apt dist-upgrade -y
 clear
 
 # Install figlet
