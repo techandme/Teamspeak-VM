@@ -56,6 +56,10 @@ fi
 echo "nameserver 9.9.9.9" > /etc/resolvconf/resolv.conf.d/base
 echo "nameserver 149.112.112.112" >> /etc/resolvconf/resolv.conf.d/base
 
+# Set locales
+apt install language-pack-en-base -y
+sudo locale-gen "sv_SE.UTF-8" && sudo dpkg-reconfigure --frontend=noninteractive locales
+
 if [ -d $SCRIPTS ];
 then
     sleep 1
