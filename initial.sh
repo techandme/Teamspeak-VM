@@ -4,44 +4,63 @@
 #
 SCRIPTS="/var/scripts"
 GITHUB_REPO="https://raw.githubusercontent.com/techandme/Teamspeak-VM/master"
-IFACE=$(lshw -c network | grep "logical name" | awk '{print $3}')
+IFACE=$(lshw -c network | grep "logical name" | awk '{print $3; exit}')
 
+network_ok() {
+    echo "Testing if network is OK..."
+    service networking restart
+    if wget -q -T 20 -t 2 http://github.com -O /dev/null
+    then
+        return 0
+    else
+        return 1
+    fi
+}
+
+# Check network
+if network_ok
+then
+    printf "Online!\n"
+else
+    echo "Setting correct interface..."
+    [ -z "$IFACE" ] && IFACE=$(lshw -c network | grep "logical name" | awk '{print $3; exit}')
+    # Set correct interface
+    {
+        sed '/# The primary network interface/q' /etc/network/interfaces
+        printf 'auto %s\niface %s inet dhcp\n# This is an autoconfigured IPv6 interface\niface %s inet6 auto\n' "$IFACE" "$IFACE" "$IFACE"
+    } > /etc/network/interfaces.new
+    mv /etc/network/interfaces.new /etc/network/interfaces
+    service networking restart
+    # shellcheck source=lib.sh
+    CHECK_CURRENT_REPO=1 . <(curl -sL https://raw.githubusercontent.com/nextcloud/vm/master/lib.sh)
+    unset CHECK_CURRENT_REPO
+fi
+
+# Check network
+if network_ok
+then
+    printf "Online!\n"
+else
+    echo "Network NOT OK!"
+    echo "You must have a working Network connection to run this script."
+    echo "Please report this issue here: https://github.com/techandme/Teamspeak-VM"
+    exit 1
+fi
 
 # Change DNS
 if ! [ -x "$(command -v resolvconf)" ]
 then
-    apt install resolvconf -y -q
+    apt update && apt install resolvconf -y -q
     dpkg-reconfigure resolvconf
 fi
 echo "nameserver 9.9.9.9" > /etc/resolvconf/resolv.conf.d/base
 echo "nameserver 149.112.112.112" >> /etc/resolvconf/resolv.conf.d/base
 
-# Set correct interface
-sed -i "s|.*|$IFACE|g" /etc/network/interfaces
-service networking restart
-
-# Check network
-echo "Testing if network is OK..."
-sleep 2
-sudo ifdown $IFACE && sudo ifup $IFACE
-wget -q --spider http://github.com
-	if [ $? -eq 0 ]; then
-    		echo -e "\e[32mOnline!\e[0m"
-	else
-		echo
-		echo "Network NOT OK. You must have a working Network connection to run this script."
-		echo "You could try to change network settings of this VM to 'Bridged Mode'".
-		echo "If that doesn't help, please try to un-check 'Replicate physical host' in"
-		echo "the network settings of the VM."
-	       	exit 1
-	fi
-
-      	# Create dir
-if 		[ -d $SCRIPTS ];
-	then
-      		sleep 1
-      	else
-      		mkdir $SCRIPTS
+if [ -d $SCRIPTS ];
+then
+    sleep 1
+else
+    mkdir $SCRIPTS
 fi
 
 sleep 2 # Avoid latency in messages
