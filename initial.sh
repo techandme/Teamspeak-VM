@@ -284,3 +284,12 @@ else
 	echo "change-teamspeak-profile.sh executed OK."
 	sleep 1
 fi
+
+# Update system
+apt update
+apt upgrade -y
+apt dist-upgrade -y
+
+echo "Rebooting..."
+reboot
+
