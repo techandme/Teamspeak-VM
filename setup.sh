@@ -77,10 +77,6 @@ else
     exit 1
 fi
 
-# Set locales
-apt install language-pack-en-base -y
-sudo locale-gen "sv_SE.UTF-8" && sudo dpkg-reconfigure --frontend=noninteractive locales
-
 # Set keyboard layout
 echo "Current keyboard layout is $(localectl status | grep "Layout" | awk '{print $3}')"
 if [[ "no" == $(ask_yes_or_no "Do you want to change keyboard layout?") ]]
@@ -114,10 +110,6 @@ clear
 # Install figlet
 apt-get install figlet -y
 clear
-
-# Change DNS
-echo "nameserver 8.26.56.26" > /etc/resolvconf/resolv.conf.d/base
-echo "nameserver 8.20.247.20" >> /etc/resolvconf/resolv.conf.d/base
 
 # Change IP
 IFCONFIG="/sbin/ifconfig"
