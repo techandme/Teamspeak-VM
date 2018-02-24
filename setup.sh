@@ -77,6 +77,34 @@ else
     exit 1
 fi
 
+# Set locales
+apt install language-pack-en-base -y
+sudo locale-gen "sv_SE.UTF-8" && sudo dpkg-reconfigure --frontend=noninteractive locales
+
+# Set keyboard layout
+echo "Current keyboard layout is $(localectl status | grep "Layout" | awk '{print $3}')"
+if [[ "no" == $(ask_yes_or_no "Do you want to change keyboard layout?") ]]
+then
+    echo "Not changing keyboard layout..."
+    sleep 1
+    clear
+else
+    dpkg-reconfigure keyboard-configuration
+    clear
+fi
+
+# Change Timezone
+echo "Current timezone is $(cat /etc/timezone)"
+if [[ "no" == $(ask_yes_or_no "Do you want to change the timezone?") ]]
+then
+    echo "Not changing timezone..."
+    sleep 1
+    clear
+else
+    dpkg-reconfigure tzdata
+clear
+fi
+
 # Update system
 apt update
 apt upgrade -y
@@ -85,27 +113,6 @@ clear
 
 # Install figlet
 apt-get install figlet -y
-clear
-
-# Set keyboard layout
-echo "Current keyboard layout is English"
-echo "You must change keyboard layout to your language"
-echo -e "\e[32m"
-read -p "Press any key to change keyboard layout... " -n1 -s
-echo -e "\e[0m"
-dpkg-reconfigure keyboard-configuration
-echo
-clear
-
-# Change Timezone
-echo "Current Timezone is Europe/Amsterdam"
-echo "You must change timezone to your timezone"
-echo -e "\e[32m"
-read -p "Press any key to change timezone... " -n1 -s
-echo -e "\e[0m"
-dpkg-reconfigure tzdata
-echo
-sleep 3
 clear
 
 # Change DNS
@@ -257,6 +264,8 @@ exit 0
 RCLOCAL
 
 bash $SCRIPTS/teamspeak.sh
+
+find /root /home/"$SUDO_USER" -type f \( -name '*.sh*' -o -name '*.html*' -o -name '*.tar*' -o -name '*.zip*' \) -delete
 
 ## Reboot
 reboot
