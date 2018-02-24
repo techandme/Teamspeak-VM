@@ -9,15 +9,16 @@ useradd teamspeak3
 sed -i 's|:/home/teamspeak3:|:/home/teamspeak3:/usr/sbin/nologin|g' /etc/passwd
 
 # Get Teamspeak
-wget http://ftp.4players.de/pub/hosted/ts3/releases/3.0.10.3/teamspeak3-server_linux-amd64-3.0.10.3.tar.gz -P /tmp
+wget http://dl.4players.de/ts/releases/3.1.0/teamspeak3-server_linux_amd64-3.1.0.tar.bz2 -P /tmp
 
 # Unpack Teamspeak
 cd /tmp
-tar xzf teamspeak3-server_linux-amd64-3.0.10.3.tar.gz
+tar jxf teamspeak3-server_linux_amd64-3.1.0.tar.bz2
+touch .ts3server_license_accepted
 cd
 
-# Move to right directory
-mv /tmp/teamspeak3-server_linux-amd64 /usr/local/teamspeak3
+# Move to correct directory
+mv /tmp/teamspeak3-server_linux_amd64 /usr/local/teamspeak3
 
 # Set ownership
 chown -R teamspeak3:root /usr/local/teamspeak3
@@ -25,6 +26,13 @@ chown -R teamspeak3:root /usr/local/teamspeak3
 # Add to upstart
 ln -s /usr/local/teamspeak3/ts3server_startscript.sh /etc/init.d/teamspeak3
 update-rc.d teamspeak3 defaults
+
+iptables -A INPUT -p udp --dport 9987 -j ACCEPT
+iptables -A INPUT -p udp --sport 9987 -j ACCEPT
+iptables -A INPUT -p tcp --dport 30033 -j ACCEPT
+iptables -A INPUT -p tcp --sport 30033 -j ACCEPT
+iptables -A INPUT -p tcp --dport 10011 -j ACCEPT
+iptables -A INPUT -p tcp --sport 10011 -j ACCEPT
 
 # Warning
 echo -e "\e[32m"
