@@ -6,8 +6,18 @@ SCRIPTS="/var/scripts"
 GITHUB_REPO="https://raw.githubusercontent.com/techandme/Teamspeak-VM/master"
 IFACE=$(lshw -c network | grep "logical name" | awk '{print $3}')
 
+
+# Change DNS
+if ! [ -x "$(command -v resolvconf)" ]
+then
+    apt install resolvconf -y -q
+    dpkg-reconfigure resolvconf
+fi
+echo "nameserver 9.9.9.9" > /etc/resolvconf/resolv.conf.d/base
+echo "nameserver 149.112.112.112" >> /etc/resolvconf/resolv.conf.d/base
+
 # Set correct interface
-sed -i "s|enp0s17|$IFACE|g" /etc/network/interfaces
+sed -i "s|.*|$IFACE|g" /etc/network/interfaces
 service networking restart
 
 # Check network
