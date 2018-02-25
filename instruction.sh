@@ -12,8 +12,13 @@ echo -e "|"  "\e[32mTo run the startup script, just type: the sudo password\e[0m
 echo -e "|"  "\e[32mThe sudo password is: teamspeak, or the PW you chose during install\e[0m   |"
 cat << INST2
 |                                                                       |
-|  ####################### Tech and Me - 2016 ########################  |
+|  ####################### Tech and Me - 2018 ########################  |
 +-----------------------------------------------------------------------+
 INST2
 
 exit 0
+
+echo
+echo "It may take some time for the script to load."
+echo "Please be patient..."
+echo
