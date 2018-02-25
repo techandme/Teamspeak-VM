@@ -7,6 +7,6 @@ ufw allow 9987
 ufw allow 10011
 ufw allow 30033
 ufw allow 10000
-ufw reload
 yes | ufw enable
+ufw reload
 clear
