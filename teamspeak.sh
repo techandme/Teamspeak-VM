@@ -49,12 +49,12 @@ systemctl enable teamspeak.service
 systemctl start teamspeak.service
 systemctl status teamspeak.service
 
-sleep 5
-
 # Show server token
+sleep 5
 cat /home/$NEWUSER/logs/ts3server_*
 
 # Set firewall rules
+SCRIPTS=/var/scripts
 bash $SCRIPTS/ufw.sh
 
 # Warning
