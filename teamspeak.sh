@@ -57,10 +57,16 @@ msg_box() {
 local PROMPT="$1"
     whiptail --msgbox "${PROMPT}" "$WT_HEIGHT" "$WT_WIDTH"
 }
-msg_box "TeamSpeak is now installed and enabled. 
-Please copy the following to a safe location:
+msg_box "TeamSpeak is now installed and enabled.
 
+ServerAdmin privilege key created, please use it to gain
+serveradmin rights for your virtualserver. Please also
+check the /home/$NEWUSER/doc/privilegekey_guide.txt for details.
+
+Please copy the SERVERTOKEN key to a safe location:
 SERVERTOKEN = $(cd /home/$NEWUSER/logs && grep -r "token" | awk '{ print $5 }' | cut -d "=" -f 2)
+
+You login information below:
 LOGIN = serveradmin
 PASSWORD = Please see this site on how to set a password: https://goo.gl/5rahB2"
 
