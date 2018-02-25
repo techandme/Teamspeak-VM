@@ -75,4 +75,6 @@ any_key() {
     echo
 }
 any_key Press any key to reboot...
+echo -e "\e[32m"
 reboot
+
