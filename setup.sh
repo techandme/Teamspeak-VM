@@ -5,6 +5,18 @@
 CLEARBOOT=$(dpkg -l linux-* | awk '/^ii/{ print $2}' | grep -v -e `uname -r | cut -f1,2 -d"-"` | grep -e [0-9] | xargs sudo apt-get -y purge)
 SCRIPTS=/var/scripts
 
+ask_yes_or_no() {
+    read -r -p "$1 ([y]es or [N]o): "
+    case ${REPLY,,} in
+        y|yes)
+            echo "yes"
+        ;;
+        *)
+            echo "no"
+        ;;
+    esac
+}
+
 # Check if root
 if [ "$(whoami)" != "root" ]; then
         echo
