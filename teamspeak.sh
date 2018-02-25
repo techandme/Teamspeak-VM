@@ -47,11 +47,13 @@ systemctl --system daemon-reload
 systemctl enable teamspeak.service
 systemctl start teamspeak.service
 systemctl status teamspeak.service
-
-# Set firewall rules
-SCRIPTS=/var/scripts
-bash $SCRIPTS/ufw.sh
-clear
+echo "Waiting while servertoken is generated..."
+while true; do
+if [ ! -z $(cd /home/$NEWUSER/logs && grep -r "token" | awk '{ print $5 }' | cut -d "=" -f 2) ]
+then
+    break
+fi
+done
 
 msg_box() {
 local PROMPT="$1"
