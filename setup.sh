@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-## Tech and Me ## - ©2016, https://www.techandme.se/
+## Tech and Me ## - ©2018, https://www.techandme.se/
 #
 CLEARBOOT=$(dpkg -l linux-* | awk '/^ii/{ print $2}' | grep -v -e `uname -r | cut -f1,2 -d"-"` | grep -e [0-9] | xargs sudo apt-get -y purge)
 SCRIPTS=/var/scripts
@@ -41,7 +41,7 @@ echo "|                                                                    |"
 echo "|   The script will take about 10 minutes to finish,                 |"
 echo "|   depending on your internet connection.                           |"
 echo "|                                                                    |"
-echo "| ####################### Tech and Me - 2016 ####################### |"
+echo "| ####################### Tech and Me - 2018 ####################### |"
 echo "+--------------------------------------------------------------------+"
 echo -e "\e[32m"
 read -p "Press any key to start the script..." -n1 -s
@@ -88,6 +88,7 @@ else
     echo "Please report this issue here: https://github.com/techandme/Teamspeak-VM"
     exit 1
 fi
+clear
 
 # Set keyboard layout
 echo "Current keyboard layout is $(localectl status | grep "Layout" | awk '{print $3}')"
