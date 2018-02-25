@@ -270,7 +270,7 @@ RCLOCAL
 
 bash $SCRIPTS/teamspeak.sh
 
-find /root /home/"$SUDO_USER" -type f \( -name '*.sh*' -o -name '*.html*' -o -name '*.tar*' -o -name '*.zip*' \) -delete
+find /root /home/"$USER" -type f \( -name '*.sh*' -o -name '*.html*' -o -name '*.tar*' -o -name '*.zip*' \) -delete
 
 ## Reboot
 reboot
