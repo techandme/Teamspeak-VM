@@ -5,27 +5,53 @@
 #PID_TS=(ps -ef | grep "teamspeak3" | awk '{print $2}')
 
 # Add user
-useradd teamspeak3
-sed -i 's|:/home/teamspeak3:|:/home/teamspeak3:/usr/sbin/nologin|g' /etc/passwd
+NEWUSER=teamspeak3
+adduser --disabled-password --gecos "" "$NEWUSER"
+sudo usermod -aG sudo "$NEWUSER"
+usermod -s /sbin/nologin "$NEWUSER"
 
 # Get Teamspeak
-wget http://dl.4players.de/ts/releases/3.1.0/teamspeak3-server_linux_amd64-3.1.0.tar.bz2 -P /tmp
+wget http://dl.4players.de/ts/releases/3.1.0/teamspeak3-server_linux_amd64-3.1.0.tar.bz2
 
 # Unpack Teamspeak
-cd /tmp
 tar jxf teamspeak3-server_linux_amd64-3.1.0.tar.bz2
-touch .ts3server_license_accepted
-cd
 
 # Move to correct directory
-mv /tmp/teamspeak3-server_linux_amd64 /usr/local/teamspeak3
+cd teamspeak3-server_linux_amd64 && mv * /home/$NEWUSER && cd .. && rm -rf teamspeak3*
+touch /home/$NEWUSER/.ts3server_license_accepted
 
 # Set ownership
-chown -R teamspeak3:root /usr/local/teamspeak3
+chown -R $NEWUSER:$NEWUSER /home/$NEWUSER
 
-# Add to upstart
-ln -s /usr/local/teamspeak3/ts3server_startscript.sh /etc/init.d/teamspeak3
-update-rc.d teamspeak3 defaults
+# Add service
+cat << TEAMSPEAK3 > "/lib/systemd/system/teamspeak.service"
+[Unit]
+Description=TeamSpeak 3 Server
+After=network.target
+
+[Service]
+WorkingDirectory=/home/$NEWUSER
+User=$NEWUSER
+Group=$NEWUSER
+Type=forking
+ExecStart=/home/$NEWUSER/ts3server_startscript.sh start inifile=ts3server.ini
+ExecStop=/home/$NEWUSER/ts3server_startscript.sh stop
+PIDFile=/home/$NEWUSER/ts3server.pid
+RestartSec=15
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+TEAMSPEAK3
+
+systemctl --system daemon-reload
+systemctl enable teamspeak.service
+systemctl start teamspeak.service
+systemctl status teamspeak.service
+
+sleep 5
+
+cat /home/$NEWUSER/logs/ts3server_*
 
 iptables -A INPUT -p udp --dport 9987 -j ACCEPT
 iptables -A INPUT -p udp --sport 9987 -j ACCEPT
@@ -43,15 +69,13 @@ echo -e "|         \e[0mLOGIN, PASSWORD, SECURITY TOKEN\e[32m                   
 echo    "|                                                                    |"
 echo -e "|         \e[0mIF YOU FAIL TO DO SO, YOU HAVE TO REINSTALL YOUR SYSTEM\e[32m    |"
 echo    "|                                                                    |"
-echo -e "|    \e[91mPress Ctrl + C when your done and please reboot\e[32m                 |"
-echo -e "|    \e[91mWith the command "reboot" to finish the install.\e[32m                  |"
-echo -e "|    \e[91mWithin 2 minutes the system reboots, after you press enter.\e[32m     |"
 echo    "+--------------------------------------------------------------------+"
 echo
-read -p "Press any key to start copying the important stuff to a safe location..." -n1 -s
-echo -e "\e[0m"
-echo
 
-# Start service
-service teamspeak3 start && sleep 120 && reboot
-#sleep 60 && kill -INT $PID_TS | service teamspeak3 start
+any_key() {
+    local PROMPT="$@"
+    read -r -p "$(printf "${PROMPT}")" -n1 -s
+    echo
+}
+any_key Press any key to reboot...
+reboot
