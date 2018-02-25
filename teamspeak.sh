@@ -7,7 +7,6 @@
 # Add user
 NEWUSER=teamspeak3
 adduser --disabled-password --gecos "" "$NEWUSER"
-sudo usermod -aG sudo "$NEWUSER"
 usermod -s /sbin/nologin "$NEWUSER"
 
 # Get Teamspeak
@@ -49,25 +48,21 @@ systemctl enable teamspeak.service
 systemctl start teamspeak.service
 systemctl status teamspeak.service
 
-# Show server token
-sleep 5
-cat /home/$NEWUSER/logs/ts3server_*
-
 # Set firewall rules
 SCRIPTS=/var/scripts
 bash $SCRIPTS/ufw.sh
+clear
 
-# Warning
-echo -e "\e[32m"
-echo    "+--------------------------------------------------------------------+"
-echo    "| Next you will need to copy/paste 3 things to a safe location       |"
-echo    "|                                                                    |"
-echo -e "|         \e[0mLOGIN, PASSWORD, SECURITY TOKEN\e[32m                            |"
-echo    "|                                                                    |"
-echo -e "|         \e[0mIF YOU FAIL TO DO SO, YOU HAVE TO REINSTALL YOUR SYSTEM\e[32m    |"
-echo    "|                                                                    |"
-echo    "+--------------------------------------------------------------------+"
-echo
+msg_box() {
+local PROMPT="$1"
+    whiptail --msgbox "${PROMPT}" "$WT_HEIGHT" "$WT_WIDTH"
+}
+msg_box "TeamSpeak is now installed and enabled. 
+Please copy the following to a safe location:
+
+SERVERTOKEN = $(cd /home/$NEWUSER/logs && grep -r "token" | awk '{ print $5 }' | cut -d "=" -f 2)
+LOGIN = serveradmin
+PASSWORD = Please see this site on how to set a password: https://goo.gl/5rahB2"
 
 any_key() {
     local PROMPT="$@"
