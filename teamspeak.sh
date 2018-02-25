@@ -51,14 +51,11 @@ systemctl status teamspeak.service
 
 sleep 5
 
+# Show server token
 cat /home/$NEWUSER/logs/ts3server_*
 
-iptables -A INPUT -p udp --dport 9987 -j ACCEPT
-iptables -A INPUT -p udp --sport 9987 -j ACCEPT
-iptables -A INPUT -p tcp --dport 30033 -j ACCEPT
-iptables -A INPUT -p tcp --sport 30033 -j ACCEPT
-iptables -A INPUT -p tcp --dport 10011 -j ACCEPT
-iptables -A INPUT -p tcp --sport 10011 -j ACCEPT
+# Set firewall rules
+bash $SCRIPTS/ufw.sh
 
 # Warning
 echo -e "\e[32m"
